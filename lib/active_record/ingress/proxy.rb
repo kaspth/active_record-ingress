@@ -1,4 +1,8 @@
-class ActiveRecord::Ingress::Proxy < Struct.new(:__record__)
+class ActiveRecord::Ingress::Proxy
+  def initialize(record)
+    @__record__ = record
+  end
+
   def method_missing(name, ...)
     find_record_ingress_named(name).run(__record__, ...)
   end
