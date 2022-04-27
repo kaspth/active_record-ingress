@@ -15,6 +15,16 @@ module Post::Ingresses; end # Zeitwerk handles this in Rails
 
 class Post::Ingresses::Update < ActiveRecord::Ingress::Base
   def perform
-    post.update title: "Updated title"
+    record.update params.slice(:title)
+  end
+end
+
+class Post::Ingresses::Destroy < ActiveRecord::Ingress::Base
+  mattr_accessor :abort, default: false
+
+  before_perform { throw :abort if abort }
+
+  def perform
+    record.destroy!
   end
 end
