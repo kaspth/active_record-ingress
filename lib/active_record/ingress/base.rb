@@ -1,5 +1,9 @@
 class ActiveRecord::Ingress::Base
-  include Callbacks, Transactions
+  require_relative "base/callbacks"
+  include Callbacks
+
+  require_relative "base/transactions"
+  include Transactions # Depends on Callbacks
 
   def initialize(record, params)
     @record, @params = record, params
