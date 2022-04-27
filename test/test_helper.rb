@@ -11,6 +11,8 @@ require_relative "boot/active_record"
 author = Author.create!
 author.posts.create! title: "First post"
 
+ActiveSupport.on_load(:active_support_test_case) { include ActiveRecord::TestFixtures }
+
 module Post::Ingresses; end # Zeitwerk handles this in Rails
 
 class Post::Ingresses::Update < ActiveRecord::Ingress::Base

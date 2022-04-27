@@ -2,11 +2,8 @@
 
 require "test_helper"
 
-class ActiveRecord::IngressTest < Minitest::Test
-  def setup
-    super
-    @post = Post.first
-  end
+class ActiveRecord::IngressTest < ActiveSupport::TestCase
+  setup { @post = Post.first }
 
   def test_that_it_has_a_version_number
     refute_nil ::ActiveRecord::Ingress::VERSION
@@ -27,7 +24,7 @@ class ActiveRecord::IngressTest < Minitest::Test
 
     @post.ingressed.destroy
     refute_predicate @post, :destroyed?
-    refure_empty Post.all
+    refute_empty Post.all
   ensure
     Post::Ingresses::Destroy.abort = old_abort
   end
