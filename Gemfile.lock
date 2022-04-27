@@ -1,0 +1,43 @@
+PATH
+  remote: .
+  specs:
+    active_record-ingress (0.1.0)
+      activerecord (>= 6.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activemodel (7.0.2.4)
+      activesupport (= 7.0.2.4)
+    activerecord (7.0.2.4)
+      activemodel (= 7.0.2.4)
+      activesupport (= 7.0.2.4)
+    activesupport (7.0.2.4)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+    concurrent-ruby (1.1.10)
+    i18n (1.10.0)
+      concurrent-ruby (~> 1.0)
+    minitest (5.15.0)
+    minitest-sprint (1.2.1)
+      path_expander (~> 1.1)
+    path_expander (1.1.0)
+    rake (13.0.6)
+    sqlite3 (1.4.2)
+    tzinfo (2.0.4)
+      concurrent-ruby (~> 1.0)
+
+PLATFORMS
+  arm64-darwin-20
+
+DEPENDENCIES
+  active_record-ingress!
+  minitest (~> 5.0)
+  minitest-sprint
+  rake (~> 13.0)
+  sqlite3
+
+BUNDLED WITH
+   2.3.11
