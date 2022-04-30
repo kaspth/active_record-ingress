@@ -2,6 +2,26 @@
 
 Pass control of Active Record methods to a dedicated object.
 
+## Usage
+
+`post.ingressed.update(title: "Updated title")` and `post.ingressed.destroy`
+
+```ruby
+# app/models/post/ingresses/update.rb
+class Post::Ingresses::Update < ActiveRecord::Ingress::Base
+  def perform
+    record.update title: params[:title]
+  end
+end
+
+# app/models/post/ingresses/destroy.rb
+class Post::Ingresses::Destroy < ActiveRecord::Ingress::Base
+  def perform
+    record.destroy!
+  end
+end
+```
+
 ## Installation
 
 Install the gem and add to the application's Gemfile by executing:
@@ -11,10 +31,6 @@ Install the gem and add to the application's Gemfile by executing:
 If bundler is not being used to manage dependencies, install the gem by executing:
 
     $ gem install active_record-ingress
-
-## Usage
-
-TODO: Write usage instructions here
 
 ## Development
 
