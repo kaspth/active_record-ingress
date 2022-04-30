@@ -13,9 +13,9 @@ author.posts.create! title: "First post"
 
 ActiveSupport.on_load(:active_support_test_case) { include ActiveRecord::TestFixtures }
 
-module Post::Ingresses; end # Zeitwerk handles this in Rails
+module Post::Ingressed; end # Zeitwerk handles this in Rails
 
-class Post::Ingresses::Publish < ActiveRecord::Ingress::Base
+class Post::Ingressed::Publish < ActiveRecord::Ingress::Base
   mattr_accessor :published_onto
 
   def perform(onto:)
@@ -23,13 +23,13 @@ class Post::Ingresses::Publish < ActiveRecord::Ingress::Base
   end
 end
 
-class Post::Ingresses::Update < ActiveRecord::Ingress::Base
+class Post::Ingressed::Update < ActiveRecord::Ingress::Base
   def perform(title:)
     post.update(title: title)
   end
 end
 
-class Post::Ingresses::Destroy < ActiveRecord::Ingress::Base
+class Post::Ingressed::Destroy < ActiveRecord::Ingress::Base
   mattr_accessor :abort, default: false
 
   before_perform { throw :abort if abort }

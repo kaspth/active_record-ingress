@@ -6,11 +6,11 @@ Pass control of Active Record methods to a dedicated object.
 
 `ActiveRecord::Ingress` adds proxy forwarding method `ingressed` to any `ActiveRecord::Base` instance.
 
-So `post.ingressed.update(title: "Updated title")` would look up a `Post::Ingresses::Update` class, instance and execute its `perform` method:
+So `post.ingressed.update(title: "Updated title")` would look up a `Post::Ingressed::Update` class, instance and execute its `perform` method:
 
 ```ruby
-# app/models/post/ingresses/update.rb
-class Post::Ingresses::Update < ActiveRecord::Ingress::Base
+# app/models/post/ingressed/update.rb
+class Post::Ingressed::Update < ActiveRecord::Ingress::Base
   # Each ingress has `params`, containing any passed keyword arguments.
   # This extracts `params[:title]` and Ruby's keyword arguments handling will prevent accepting other arguments.
   def perform(title:)
@@ -22,8 +22,8 @@ end
 Ingresses can be used to create other forwarding too. Here, a `post.ingressed.prepare` is added:
 
 ```ruby
-# app/models/post/ingresses/prepare.rb
-class Post::Ingresses::Publish < ActiveRecord::Ingress::Base
+# app/models/post/ingressed/prepare.rb
+class Post::Ingressed::Publish < ActiveRecord::Ingress::Base
   def perform
     # Forwards to `record.transaction`
     transaction do

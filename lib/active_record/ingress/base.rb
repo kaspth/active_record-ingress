@@ -9,7 +9,7 @@ class ActiveRecord::Ingress::Base
   end
 
   def self.inherited(klass)
-    if alias_name = klass.module_parent_name.chomp("::Ingresses").underscore.presence
+    if alias_name = klass.module_parent_name.chomp("::Ingressed").underscore.presence
       alias_method alias_name, :record
     end
   end

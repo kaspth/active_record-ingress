@@ -20,21 +20,21 @@ class ActiveRecord::IngressTest < ActiveSupport::TestCase
   end
 
   def test_aborts_action_through_ingress
-    old_abort, Post::Ingresses::Destroy.abort = Post::Ingresses::Destroy.abort, true
+    old_abort, Post::Ingressed::Destroy.abort = Post::Ingressed::Destroy.abort, true
 
     @post.ingressed.destroy
     refute_predicate @post, :destroyed?
     refute_empty Post.all
   ensure
-    Post::Ingresses::Destroy.abort = old_abort
+    Post::Ingressed::Destroy.abort = old_abort
   end
 
   def test_ingressed_extension
-    old_published_onto, Post::Ingresses::Publish.published_onto = Post::Ingresses::Publish.published_onto, true
+    old_published_onto, Post::Ingressed::Publish.published_onto = Post::Ingressed::Publish.published_onto, true
 
     @post.publish(onto: :somewhere)
-    assert_equal :somewhere, Post::Ingresses::Publish.published_onto
+    assert_equal :somewhere, Post::Ingressed::Publish.published_onto
   ensure
-    Post::Ingresses::Publish.published_onto = old_published_onto
+    Post::Ingressed::Publish.published_onto = old_published_onto
   end
 end

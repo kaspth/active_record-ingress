@@ -11,6 +11,6 @@ class ActiveRecord::Ingress::Proxy
     attr_reader :__record__
 
     def find_record_ingress_named(name)
-      "#{__record__.class.name}::Ingresses::#{name.to_s.classify}".constantize
+      "#{__record__.class.name}::Ingressed::#{name.to_s.classify}".constantize
     end
 end
