@@ -7,16 +7,8 @@ module ActiveRecord::Ingress::Base::Callbacks
   end
 
   class_methods do
-    def before_perform(...)
-      set_callback(:perform, :before, ...)
-    end
-
-    def after_perform(...)
-      set_callback(:perform, :after, ...)
-    end
-
-    def around_perform(...)
-      set_callback(:perform, :around, ...)
-    end
+    def before_perform(...) = set_callback(:perform, :before, ...)
+    def around_perform(...) = set_callback(:perform, :around, ...)
+    def after_perform(...)  = set_callback(:perform, :after, ...)
   end
 end
