@@ -17,7 +17,7 @@ module Post::Ingresses; end # Zeitwerk handles this in Rails
 
 class Post::Ingresses::Update < ActiveRecord::Ingress::Base
   def perform
-    record.update params.slice(:title)
+    post.update params.slice(:title)
   end
 end
 
@@ -27,6 +27,6 @@ class Post::Ingresses::Destroy < ActiveRecord::Ingress::Base
   before_perform { throw :abort if abort }
 
   def perform
-    record.destroy!
+    post.destroy!
   end
 end

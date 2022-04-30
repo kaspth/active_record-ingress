@@ -9,6 +9,12 @@ class ActiveRecord::Ingress::Base
     @record, @params = record, params
   end
 
+  def self.inherited(klass)
+    if alias_name = klass.module_parent_name.chomp("::Ingresses").underscore.presence
+      alias_method alias_name, :record
+    end
+  end
+
   def self.run(...)
     new(...).run
   end
