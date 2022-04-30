@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    active_record-ingress (0.1.0)
+    active_record-ingress (0.2.0)
       activerecord (>= 6.1)
 
 GEM
