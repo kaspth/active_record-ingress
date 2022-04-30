@@ -15,6 +15,14 @@ ActiveSupport.on_load(:active_support_test_case) { include ActiveRecord::TestFix
 
 module Post::Ingresses; end # Zeitwerk handles this in Rails
 
+class Post::Ingresses::Publish < ActiveRecord::Ingress::Base
+  mattr_accessor :published_onto
+
+  def perform(onto:)
+    self.published_onto = onto
+  end
+end
+
 class Post::Ingresses::Update < ActiveRecord::Ingress::Base
   def perform(title:)
     post.update(title: title)

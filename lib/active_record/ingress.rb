@@ -11,6 +11,15 @@ module ActiveRecord::Ingress
       Proxy.new(self)
     end
   end
+
+  module Extension
+    def ingressed(*names)
+      delegate *names, to: :ingressed
+    end
+  end
 end
 
-ActiveSupport.on_load(:active_record) { include ActiveRecord::Ingress::Integration }
+ActiveSupport.on_load(:active_record) do
+  include ActiveRecord::Ingress::Integration
+  extend  ActiveRecord::Ingress::Extension
+end
