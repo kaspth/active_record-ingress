@@ -34,6 +34,14 @@ class Post::Ingresses::Publish < ActiveRecord::Ingress::Base
 end
 ```
 
+It's also possible to annotate an ingress on the model side so it's always used:
+
+```ruby
+class Post < ActiveRecord::Base
+  ingressed :publish # defines `publish` that delegates to `ingressed.publish`
+end
+```
+
 ## Installation
 
 Install the gem and add to the application's Gemfile by executing:
