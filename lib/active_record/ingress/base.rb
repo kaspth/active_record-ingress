@@ -5,6 +5,8 @@ class ActiveRecord::Ingress::Base
   require_relative "base/transactions"
   include Transactions # Depends on Callbacks
 
+  singleton_class.attr_reader :perform_with_params
+
   def initialize(record, params = {})
     @record, @params = record, params
   end
@@ -15,13 +17,23 @@ class ActiveRecord::Ingress::Base
     end
   end
 
+  def self.method_added(name)
+    if name == :perform
+      if instance_method(:perform).arity.nonzero?
+        @perform_with_params = ->(params) { perform(**params.to_h) }
+      else
+        @perform_with_params = ->(params) { perform }
+      end
+    end
+  end
+
   def self.run(...)
     new(...).run
   end
 
   def run
     run_callbacks :perform do
-      perform
+      instance_exec(params, &self.class.perform_with_params)
     end
   end
 

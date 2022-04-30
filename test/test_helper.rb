@@ -16,8 +16,8 @@ ActiveSupport.on_load(:active_support_test_case) { include ActiveRecord::TestFix
 module Post::Ingresses; end # Zeitwerk handles this in Rails
 
 class Post::Ingresses::Update < ActiveRecord::Ingress::Base
-  def perform
-    post.update params.slice(:title)
+  def perform(title:)
+    post.update(title: title)
   end
 end
 
