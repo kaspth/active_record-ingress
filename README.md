@@ -11,8 +11,10 @@ So `post.ingressed.update(title: "Updated title")` would look up a `Post::Ingres
 ```ruby
 # app/models/post/ingresses/update.rb
 class Post::Ingresses::Update < ActiveRecord::Ingress::Base
-  def perform
-    post.update title: params[:title]
+  # Each ingress has `params`, containing any passed keyword arguments.
+  # This extracts `params[:title]` and Ruby's keyword arguments handling will prevent accepting other arguments.
+  def perform(title:)
+    post.update(title: title)
   end
 end
 ```
