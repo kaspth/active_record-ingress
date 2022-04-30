@@ -19,10 +19,10 @@ class Post::Ingressed::Update < ActiveRecord::Ingress::Base
 end
 ```
 
-Ingresses can be used to create other forwarding too. Here, a `post.ingressed.prepare` is added:
+Ingresses can be used to create other forwarding too. Here, a `post.ingressed.publish` is added:
 
 ```ruby
-# app/models/post/ingressed/prepare.rb
+# app/models/post/ingressed/publish.rb
 class Post::Ingressed::Publish < ActiveRecord::Ingress::Base
   def perform
     # Forwards to `record.transaction`
