@@ -2,9 +2,6 @@ class ActiveRecord::Ingress::Base
   require_relative "base/callbacks"
   include Callbacks
 
-  require_relative "base/transactions"
-  include Transactions # Depends on Callbacks
-
   singleton_class.attr_reader :perform_with_params
 
   def initialize(record, params = {})
@@ -39,4 +36,5 @@ class ActiveRecord::Ingress::Base
 
   private
     attr_reader :record, :params
+    delegate :transaction, to: :record
 end
